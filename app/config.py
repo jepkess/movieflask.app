@@ -1,24 +1,28 @@
-class config: # class that contains configurations that are used in both dev and prod.
-    """
-    General configuration parent class 
-    """
-    pass
-class prodconfig(config):
-    """
-     Production  configuration child class
+class Config:
+    '''
+    General configuration parent class
+    '''
+    MOVIE_API_KEY='1ae99d3bc681cc606e31ddc9de6be3bb'
+    MOVIE_API_BASE_URL ='https://api.themoviedb.org/3/movie/{}?api_key={}'
+
+
+
+class ProdConfig(Config):
+    '''
+    Production  configuration child class
 
     Args:
         Config: The parent configuration class with General configuration settings
-    """
+    '''
     pass
-class Devconfig(config): 
-    """
+
+
+class DevConfig(Config):
+    '''
     Development  configuration child class
 
     Args:
         Config: The parent configuration class with General configuration settings
-    """
-    pass
+    '''
 
-
-    DEBUG=True
+    DEBUG = True
