@@ -61,7 +61,7 @@ def get_movie(id):
         movie_details_data = url.read()
         movie_details_response = json.loads(movie_details_data)
 
-        movie_object = None
+        movie_object = None 
         if movie_details_response:
             id = movie_details_response.get('id')
             title = movie_details_response.get('original_title')
