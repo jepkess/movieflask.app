@@ -17,10 +17,10 @@ unzip it on your documents folder
 open the folder on your preferred text/code editor
 code away
 ## Technologies used
-1.Python3.8
-2.Flask
-3.Movie Api
-4.pip
+1. Python3.8
+2. Flask
+3. Movie Api
+4. pip
 ## Contact details
 Reach me on +254 721473 0r biivincent1997@gmail.com
 
