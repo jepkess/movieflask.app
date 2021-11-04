@@ -4,3 +4,12 @@
 {% block navbar %}
     {% include 'navbar.html' %}
 {% endblock %}
+{%block styles%}
+{{super()}}
+<!-- Importing simple mde css and js files -->
+{{simplemde.css}} 
+{{simplemde.js}}
+{%endblock %}
+
+<!-- super() is used to maintain the code that was define in that code block inside bootstrap /base.html. -->
+<!-- simplemde.css and js define the links to the simple mde CDN -->
