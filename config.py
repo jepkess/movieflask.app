@@ -43,6 +43,14 @@ class DevConfig(Config):
     SQLALCHEMY_DATABASE_URL='postgresql+psycopg2://moringa:1234@localhost/watchlist'
     DEBUG = True
  # cinfig_options that help us access different configuration option classes.
+
+class Config:
+    # simple mde configurations
+    SIMPLEMDE_JS_IIFE= True
+    SIMPLEMDE_USE_CDN= True
+
+
+
 config_options = {
 'development':DevConfig,
 'production':ProdConfig,
