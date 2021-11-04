@@ -4,13 +4,13 @@ import urllib.request,json
 from .models import Movie
 
 # Getting api key
-api_key = None
+api_key = '1ae99d3bc681cc606e31ddc9de6be3bb'
 # Getting the movie base url
 base_url = None
 
 def configure_request(app):
     global api_key,base_url
-    api_key = app.config['MOVIE_API_KEY']
+    # api_key = app.config['MOVIE_API_KEY']
     base_url = app.config['MOVIE_API_BASE_URL']
 
 
@@ -20,7 +20,7 @@ def get_movies(category): # a function that takes in a movie category as an argu
     Function that gets the json response to our url request
     '''
     get_movies_url = base_url.format(category,api_key) #  the final URL for our API request(get_movies_url)
-
+    print(get_movies_url)
     with urllib.request.urlopen(get_movies_url) as url:# function that takes in get_movies_url as an argument and send request as the url.
         get_movies_data = url.read() #read() read the response and store in the get_movies_data.
         get_movies_response = json.loads(get_movies_data)# json.load method convert the json responses to the python dictionary
