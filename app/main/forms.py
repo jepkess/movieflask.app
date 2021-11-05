@@ -11,4 +11,13 @@ class ReviewForm(FlaskForm):
 # editing the profile.
 class UpdateProfile(FlaskForm):
     bio = TextAreaField('Tell us about you.',validators = [Required()])
+    submit = SubmitField('Submit')   
+
+
+#creating a class reviewform.
+class ReviewForm(FlaskForm):
+    title = StringField('Review title',validators=[Required()])
+
+    review = TextAreaField('Movie review')
+
     submit = SubmitField('Submit')    
