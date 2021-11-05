@@ -8,6 +8,7 @@ from  flask_migrate import Migrate,MigrateCommand
 
 app = create_app('development')
 app=create_app('test')
+app= create_app('production') # we pass in the production from the config options dictionary.
 manager = Manager(app)
 migrate = Migrate(app,db) #app instance from the app and db instance from the SQLAlchemy.
 manager.add_command('db',MigrateCommand)
