@@ -5,6 +5,8 @@ from .forms import ReviewForm,UpdateProfile
 from ..models import Review,User
 from flask_login import login_required,current_user#login required will intercept the request and check if the user is authenticated.
 from .. import db,photos
+import markdown2 #module thet is responsible for the conversion from markdown to HTML.
+
 
 #views
 @main.route('/')
@@ -31,16 +33,9 @@ def profile(uname):
     user = User.query.filter_by(username = uname).first()
 
     if user is None:
-        abort(404) #abort function that stops the request.
-    form=UpdateProfile() # view function that takes in the username and instantiates the updateprofile form class.
-    if form.validate_on_submit():
-        user.bio = form.bio.data
-
-        db.session.add(user)
-        db.session.commit() 
-        
-        return redirect(url_for('.profile',uname=user.username))
-    return render_template("profile/profile.html", form=form)      
+        abort(404)       #abort function that stops the request.
+   
+    return render_template("profile/profile.html",user=user)      
 
 @main.route('/movie/<int:id>')
 def movie(id):
@@ -82,6 +77,24 @@ def new_review(id):
 
     title = f'{movie.title} review'
     return render_template('new_review.html',title = title, review_form=form, movie=movie)
+@main.route('/user/<uname>/update',methods = ['GET','POST'])
+@login_required
+def update_profile(uname):
+    user = User.query.filter_by(username = uname).first()
+    if user is None:
+        abort(404)
+
+    form = UpdateProfile()
+
+    if form.validate_on_submit():
+        user.bio = form.bio.data
+
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('.profile',uname=user.username))
+
+    return render_template('profile/update.html',form =form)
 
 @main.route('/user/<uname>/update/pic',methods= ['POST']) # root that will process our form submission request.
 @login_required
@@ -93,3 +106,14 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+
+
+
+@main.route('/review/<int:id>') 
+def single_review(id): #function that will be responsible for handling requests for a single review.
+    review=Review.query.get(id)
+    if review is None:
+        abort(404)
+    format_review = markdown2.markdown(review.movie_review,extras=["code-friendly", "fenced-code-blocks"])
+    return render_template('review.html',review = review,format_review=format_review)    
